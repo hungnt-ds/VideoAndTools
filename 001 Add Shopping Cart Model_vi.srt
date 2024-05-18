@@ -1,0 +1,156 @@
+1
+00:00:01,609 --> 00:00:08,540
+Bây giờ trong dự án của chúng tôi, khi chúng tôi đi đến chi tiết ở đây, chúng tôi không thể thêm các mặt hàng vào giỏ hàng.
+
+2
+00:00:08,930 --> 00:00:10,730
+Và lý do rất đơn giản.
+
+3
+00:00:10,760 --> 00:00:14,780
+Chúng tôi không có mô hình để lưu trữ giỏ hàng trong cơ sở dữ liệu.
+
+4
+00:00:15,170 --> 00:00:18,260
+Bây giờ có nhiều cách để lưu trữ giỏ hàng.
+
+5
+00:00:18,290 --> 00:00:22,940
+Rõ ràng là bạn cũng có thể lưu trữ tất cả giỏ hàng trong phiên.
+
+6
+00:00:23,420 --> 00:00:31,190
+Tôi luôn muốn lưu trữ mặt hàng đó trong cơ sở dữ liệu vì điều thường xảy ra là khi ai đó thêm mặt hàng vào giỏ hàng, nếu chúng
+
+7
+00:00:31,190 --> 00:00:38,180
+tôi có mặt hàng đó trong cơ sở dữ liệu, chúng tôi luôn có thể theo dõi mặt hàng đó. Này, mặt hàng đó đã ở trong
+
+8
+00:00:38,180 --> 00:00:45,440
+GIỎ HÀNG được ba ngày và chúng tôi có thể gửi cho họ email quảng cáo vì những hoạt động tiếp thị đó có thể được thực
+
+9
+00:00:45,440 --> 00:00:47,390
+hiện với giỏ hàng.
+
+10
+00:00:47,420 --> 00:00:51,020
+Luôn luôn tốt khi thêm nó vào cơ sở dữ liệu.
+
+11
+00:00:51,620 --> 00:00:58,520
+Vì vậy, hãy nghĩ xem tất cả các thuộc tính cần thiết để thêm một mặt hàng vào giỏ hàng sẽ là gì.
+
+12
+00:00:59,620 --> 00:01:05,830
+Vì vậy, chúng tôi sẽ yêu cầu sản phẩm nào đã được thêm vào, số lượng của sản phẩm đó là bao nhiêu?
+
+13
+00:01:05,920 --> 00:01:11,890
+Và trên hết, ID người dùng của người dùng đã thêm vào giỏ hàng là gì?
+
+14
+00:01:12,310 --> 00:01:18,370
+Bởi vì nếu không có ID người dùng, nó sẽ là một mớ hỗn độn lớn vì bất kỳ người dùng nào cũng có thể thêm một mục.
+
+15
+00:01:18,980 --> 00:01:21,470
+Vì vậy, mô hình của chúng tôi là khá đơn giản.
+
+16
+00:01:21,920 --> 00:01:25,100
+Để tôi chuyển lại và dừng ứng dụng.
+
+17
+00:01:25,280 --> 00:01:30,710
+Đóng mọi thứ khác ở đây và chúng tôi sẽ thêm một mô hình mới.
+
+18
+00:01:31,600 --> 00:01:33,340
+Thêm một lớp mới.
+
+19
+00:01:33,980 --> 00:01:36,350
+Đó sẽ là giỏ hàng.
+
+20
+00:01:37,580 --> 00:01:42,320
+Nó sẽ là một lớp công khai và nó sẽ có bốn thuộc tính.
+
+21
+00:01:42,680 --> 00:01:46,130
+Chúng tôi sẽ có ID, đây sẽ là khóa chính.
+
+22
+00:01:46,160 --> 00:01:52,310
+Chúng tôi có ID sản phẩm và ID người dùng và số lượng sẽ giống với số lượng.
+
+23
+00:01:52,790 --> 00:01:57,590
+ID sản phẩm mà chúng tôi có ở đây sẽ là khóa ngoại cho bảng sản phẩm.
+
+24
+00:01:57,590 --> 00:02:01,340
+Vì vậy, hãy để tôi thêm khóa ngoại đó và không bao giờ xác thực.
+
+25
+00:02:01,580 --> 00:02:04,280
+Và chúng tôi có ID người dùng ứng dụng.
+
+26
+00:02:05,540 --> 00:02:09,180
+Đó sẽ là khóa ngoại đối với bảng người dùng ứng dụng.
+
+27
+00:02:09,199 --> 00:02:11,630
+Vì vậy, chúng tôi cũng sẽ thêm điều đó.
+
+28
+00:02:12,670 --> 00:02:16,510
+Cuối cùng, khi chúng tôi có số lượng ở đây, tôi có thể thêm xác thực.
+
+29
+00:02:16,510 --> 00:02:20,110
+Phạm vi đó phải nằm trong khoảng từ 1 đến 1000.
+
+30
+00:02:20,140 --> 00:02:24,400
+Nếu không, chúng tôi sẽ hiển thị thông báo lỗi tùy chỉnh.
+
+31
+00:02:25,300 --> 00:02:28,540
+Vì vậy, điều đó có vẻ tốt cho mô hình giỏ hàng.
+
+32
+00:02:29,050 --> 00:02:36,190
+Chúng tôi phải thêm nó vào cơ sở dữ liệu của mình và rất may với giỏ hàng, chúng tôi sẽ không phải tạo bất kỳ bản
+
+33
+00:02:36,190 --> 00:02:36,970
+ghi nào.
+
+34
+00:02:38,060 --> 00:02:40,670
+Vì vậy, chúng tôi có giỏ hàng ở đây.
+
+35
+00:02:42,420 --> 00:02:47,340
+Gọi đó là giỏ hàng và chúng tôi phải thêm di chuyển.
+
+36
+00:02:48,690 --> 00:02:54,570
+Tôi sẽ gọi giỏ hàng quảng cáo đó tới DB và để tôi cập nhật cơ sở dữ liệu.
+
+37
+00:02:59,020 --> 00:02:59,740
+Hoàn hảo.
+
+38
+00:02:59,740 --> 00:03:03,820
+Vì vậy, mô hình giỏ hàng của chúng tôi đã được thêm vào cơ sở dữ liệu của chúng tôi.
+
+39
+00:03:03,850 --> 00:03:06,850
+Hãy để tôi tiếp tục từ video tiếp theo.
+

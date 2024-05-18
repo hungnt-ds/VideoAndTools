@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Resizable Video with Subtitles</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- file css -->
+    <link rel="stylesheet" href="styles.css">
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <!-- Button kích hoạt thuộc tính collapsible -->
+    <button data-toggle="collapse" data-target="#demo">Collapsible</button>
+    <!-- Button để chọn tốc độ video -->
+    <button onclick="changeSpeed(1.0)">1.0x</button>
+    <button onclick="changeSpeed(1.25)">1.25x</button>
+    <button onclick="changeSpeed(1.5)">1.35x</button>
+    <button onclick="changeSpeed(1.5)">1.5x</button>
+
+
+    <!-- Phần bị ẩn hoặc hiển thị tùy thuộc vào thuộc tính collapsible -->
+    <div id="demo" class="collapse">
+        <div class="row">
+            <!-- Input để chọn file video -->
+            <div class="col-sm-6">
+                <label for="videoFile">Chọn file video:</label>
+                <input type="file" id="videoFile" accept="video/*" class="form-control">
+            </div>
+            <!-- Input để chọn file phụ đề -->
+            <div class="col-sm-6">
+                <label for="subtitlesFile">Chọn file sub:</label>
+                <input type="file" id="subtitlesFile" accept=".vtt" class="form-control">
+            </div>
+            <!-- Nút để hủy chọn file đã chọn -->
+            <button onclick="clearFileInputs()">Hủy chọn</button>
+        </div>
+
+        <br>
+
+        <!-- Button để chuyển đổi chế độ màu -->
+        <button onclick="toggleColorScheme()">Chuyển đổi chế độ màu</button>
+        <!-- Button để điều hướng đến trang khác -->
+        <button onclick="redirectToOtherPage()">Tính tổng thời lượng video từ thư mục</button>
+    </div>
+
+    <!-- Button để mở/collapse phần content -->
+    <!-- <button type="button" class="collapsible">Open Collapsible</button> -->
+    <div class="content">
+        <!-- Nội dung của phần content -->
+    </div>
+
+    <!-- Container chứa video có thể resize -->
+    <div id="videoContainer">
+        <video id="resizableVideo" controls>
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <div id="resizableHandle"></div>
+    </div>
+
+    <!-- Hiển thị phụ đề -->
+    <div id="subtitleDisplay" class="chineseText"></div>
+
+    <!-- Popup hiển thị từng từ của phụ đề -->
+    <div class="popup-container">
+        <div class="hidden" id="popup"></div>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

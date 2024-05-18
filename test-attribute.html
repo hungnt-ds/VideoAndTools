@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Example using aria-expanded</title>
+<style>
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+
+  .submenu {
+    background-color: #444;
+    color: #fff;
+    padding: 5px;
+    margin-top: 5px;
+  }
+
+  .submenu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .submenu li {
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+
+<div class="menu">
+  <button id="menuButton" aria-expanded="false" aria-controls="submenu">Menu</button>
+  <div id="submenu" class="submenu" hidden>
+    <ul>
+      <li><a href="#">Item 1</a></li>
+      <li><a href="#">Item 2</a></li>
+      <li><a href="#">Item 3</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const submenu = document.getElementById('submenu');
+
+  menuButton.addEventListener('click', () => {
+    const expanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+    menuButton.setAttribute('aria-expanded', String(!expanded));
+    submenu.hidden = expanded;
+  });
+</script>
+
+</body>
+</html>

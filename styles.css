@@ -1,0 +1,71 @@
+#videoContainer {
+    width: 100%;
+    height: 900px;
+    overflow: hidden;
+    position: relative;
+}
+
+#resizableVideo {
+    width: 100%;
+    height: 100%;
+}
+
+#resizableHandle {
+    width: 10px;
+    height: 10px;
+    background-color: #000;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: se-resize;
+}
+
+p {
+    display: inline;
+    font-size: 30px;
+}
+
+.hidden {
+    display: none;
+    position: absolute;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 80%;
+    z-index: 1;
+}
+
+.popup-container {
+    position: relative;
+    display: inline-block;
+}
+
+.popup-container:hover .hidden {
+    display: block;
+    top: 20px;
+}
+
+body {
+    color: rgb(29, 33, 37);
+    /* Màu chữ mặc định là trắng */
+    background-color: rgb(178, 190, 203);
+    /* Màu nền mặc định là đen */
+    transition: color 0.5s, background-color 0.5s;
+    /* Hiệu ứng chuyển đổi màu */
+}
+
+#element {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+}
+
+/* Loại bỏ lớp mờ khi video tạm dừng */
+video::-webkit-media-controls-panel {
+    background-color: transparent !important;
+}
+
+body {
+    zoom: 80%;
+}

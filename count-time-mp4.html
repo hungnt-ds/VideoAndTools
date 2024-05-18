@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tính tổng thời lượng video từ thư mục</title>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+</style>
+</head>
+<body>
+    <h2>Tính tổng thời lượng video từ thư mục</h2>
+    <input type="file" id="directoryInput" webkitdirectory multiple accept="video/mp4">
+    <button onclick="calculateTotalDuration()">Tính tổng thời lượng</button>
+    <table id="videoTable">
+        <thead>
+            <tr>
+                <th>Tên File</th>
+                <th>Thời Lượng (giây)</th>
+                <th>Thời Gian (h:m:s)</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+            <tr>
+                <td><strong>Tổng</strong></td>
+                <td id="totalSeconds"></td>
+                <td id="totalTime"></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        function calculateTotalDuration() {
+            const directoryInput = document.getElementById('directoryInput');
+            const videoTableBody = document.querySelector('#videoTable tbody');
+            const totalSecondsCell = document.getElementById('totalSeconds');
+            const totalTimeCell = document.getElementById('totalTime');
+
+            videoTableBody.innerHTML = '';
+            totalSecondsCell.textContent = '';
+            totalTimeCell.textContent = '';
+
+            let totalSeconds = 0;
+            const files = Array.from(directoryInput.files)
+                .filter(file => file.type.match('video/mp4'));
+
+            files.forEach(file => {
+                const video = document.createElement('video');
+                const fileRow = document.createElement('tr');
+                const nameCell = document.createElement('td');
+                const durationCell = document.createElement('td');
+                const timeCell = document.createElement('td');
+
+                video.src = URL.createObjectURL(file);
+                video.preload = 'metadata';
+                video.onloadedmetadata = function() {
+                    URL.revokeObjectURL(video.src);
+                    const duration = Math.round(video.duration);
+                    durationCell.textContent = duration;
+                    const hours = Math.floor(duration / 3600);
+                    const minutes = Math.floor((duration % 3600) / 60);
+                    const seconds = duration % 60;
+                    timeCell.textContent = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+                    totalSeconds += duration;
+                    totalSecondsCell.textContent = totalSeconds;
+                    const totalHours = Math.floor(totalSeconds / 3600);
+                    const totalMinutes = Math.floor((totalSeconds % 3600) / 60);
+                    const totalSecondsRemainder = totalSeconds % 60;
+                    totalTimeCell.textContent = totalHours.toString().padStart(2, '0') + ':' + totalMinutes.toString().padStart(2, '0') + ':' + totalSecondsRemainder.toString().padStart(2, '0');
+                };
+
+                nameCell.textContent = file.name;
+                fileRow.appendChild(nameCell);
+                fileRow.appendChild(durationCell);
+                fileRow.appendChild(timeCell);
+                videoTableBody.appendChild(fileRow);
+            });
+        }
+    </script>
+</body>
+</html>
